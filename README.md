@@ -6,6 +6,7 @@ Link para Download: https://tortoisesvn.net/downloads.html
 - Depois na opção **SVN Checkout**
 - Em **URL of repository** coloque o link: https://github.com/TsplayerT/DesenvolvedorRelacional/trunk
 ![alt text](https://raw.githubusercontent.com/TsplayerT/DesenvolvedorRelacional/master/Arquivos/README.md/01opcoes_configuracao.png)
+
 _(O programa irá criar a pasta com os arquivos da branch master)_
 # Como sincronizar o projeto com esse repositório via Visual Studio
 #### Usando AnkhSVN *(Subversion Support for Visual Studio)*:
@@ -26,4 +27,5 @@ _(O programa irá criar a pasta com os arquivos da branch master)_
 - No menu superior do Visual Studio, clique em **View**
 - Logo após, escolha **Other Windows**
 - Posteriormente, a opção **Pending Changes**
+
 *(Resumo: use o atalho *CTRL + K* e depois pressiona a letra **C**)*
