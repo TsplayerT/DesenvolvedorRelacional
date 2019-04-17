@@ -1,7 +1,7 @@
 # Como clonar esse repositório
 ### Usando a ferramenta TortoiseSVN:
 Link para Download: https://tortoisesvn.net/downloads.html
-- Escolha um diretório
+- Escolha um diretório da sua máquina (para armazenar os arquivos do projeto)
 - Clique com o botão direito do mouse
 - Depois na opção **SVN Checkout**
 - Em **URL of repository** coloque o link: https://github.com/TsplayerT/DesenvolvedorRelacional/trunk
