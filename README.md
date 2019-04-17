@@ -35,4 +35,4 @@ _(O programa irá criar a pasta com os arquivos da branch master)_
 - Logo após, escolha **Other Windows**
 - Posteriormente, a opção **Pending Changes**
 
-*(Resumo: use o atalho *CTRL + K* e depois pressiona a letra **C**)*
+*(Resumo: use o atalho *CTRL + K* e depois pressione a letra **C**)*
