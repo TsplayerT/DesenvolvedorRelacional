@@ -9,6 +9,9 @@ namespace DesenvolvedorRelacional
     {
         static void Main(string[] args)
         {
+
+            // ALTERAÇÃO FEITA PELO GALO 
+                
             //var conexao = new Conectividade();
             //var gerenciar = new Gerenciamento(conexao);
             //gerenciar.AdicionarTabela("primeira_tabela");
