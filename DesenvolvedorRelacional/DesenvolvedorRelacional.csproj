@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Infraestrutura\Seguranca\Encriptacao.cs" />
+    <Compile Include="Infraestrutura\Utilidade.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorio\Base\Botao.cs">

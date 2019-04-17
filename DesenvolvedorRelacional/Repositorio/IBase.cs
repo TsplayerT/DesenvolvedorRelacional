@@ -14,13 +14,10 @@ namespace DesenvolvedorRelacional.Repositorio
         public Point Tamanho
         {
             get => new Point(Size.Width, Size.Height);
-            set
-            {
-                Size = new Size(value.X, value.Y);
-            }
+            set => Size = new Size(value.X, value.Y);
         }
         public bool PossivelMover { get; set; }
-        private Point MousePosicaoAntiga { get; set; }
+        internal Point MousePosicaoAntiga { get; set; }
         public bool PossivelDestacarMouse { get; set; }
 
         protected override void OnMouseEnter(EventArgs e)

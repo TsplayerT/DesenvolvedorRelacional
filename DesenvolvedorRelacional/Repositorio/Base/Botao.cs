@@ -44,29 +44,21 @@ namespace DesenvolvedorRelacional.Repositorio.Base
             Texto = "Novo Botão";
             Tamanho = new Point(100, 30);
 
-            MouseEnter += (sender, args) =>
-            {
-                if (BackColor == CorFundo)
-                {
-                    BackColor = CorFundoDestaque;
-                }
-                else if (BackColor == CorFundoSelecionado)
-                {
-                    BackColor = CorFundoDestaqueSelecionado;
-                }
-            };
-            MouseLeave += (sender, args) =>
-            {
-                BackColor = Selecionado ? CorFundoSelecionado : CorFundo;
-            };
             MouseClick += (sender, args) =>
             {
                 BackColor = CorFundoSelecionado;
                 Selecionado = !Selecionado;
             };
         }
+
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            BackColor = Selecionado ? CorFundoSelecionado : CorFundoDestaque;
+        }
         protected override void OnMouseLeave(EventArgs e)
         {
+            BackColor = Selecionado ? CorFundoSelecionado : CorFundo;
+
             if (ClientRectangle.Contains(PointToClient(MousePosition)))
             {
                 return;
