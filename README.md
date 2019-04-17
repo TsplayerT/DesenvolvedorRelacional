@@ -1,4 +1,4 @@
-# Objetivos do projeto:
+# Objetivos do projeto
 1. [ ] Desenvolvimento rápido e prático de telas simples com base nas bibliotecas nativas do NET Framework
     - [ ] Design gráfico armazenado em arquivos relacionais objetivos e direto
 2.  [ ] Gerenciamento seguro de arquivos com manipulação básica
