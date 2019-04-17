@@ -26,7 +26,10 @@ namespace DesenvolvedorRelacional.Repositorio.Base
                     }
                 }
 
-                Size = new Size(value.Max(x => x.Tamanho.X) + 20, tamanhoTotal + value.Last().Tamanho.Y + 10);
+                if (value.Any())
+                {
+                    Size = new Size(value.Max(x => x.Tamanho.X) + 20, tamanhoTotal + value.Last().Tamanho.Y + 10);
+                }
             }
         }
 

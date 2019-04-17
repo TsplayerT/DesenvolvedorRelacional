@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 
 namespace DesenvolvedorRelacional.Repositorio
 {
@@ -18,6 +16,7 @@ namespace DesenvolvedorRelacional.Repositorio
 
         public int PegarMenorIdDisponivel(string tabela)
         {
+            //comando funciona no SQL mas no SQLite falta algo semelhante ao "spt_values"
             SQLComando.CommandText = $"SELECT MIN(id) FROM master..spt_values WHERE TYPE = 'p' AND id<= (SELECT MAX(id) FROM {tabela}) AND id NOT IN (SELECT id FROM {tabela}) AND id != 0";
             var novoId = (int?)SQLComando.ExecuteReader()[0];
 

@@ -32,10 +32,8 @@ namespace DesenvolvedorRelacional.Repositorio.Base
         public Color CorFundoSelecionado => Color.FromArgb(175, 175, 175);
         public Color CorFundoDestaqueSelecionado => Color.FromArgb(150, 150, 150);
 
-        public Botao(Control controlPai)
+        public Botao()
         {
-            Parent = controlPai;
-
             LabelTexto = new Label
             {
                 AutoSize = true
@@ -44,13 +42,7 @@ namespace DesenvolvedorRelacional.Repositorio.Base
 
             BackColor = CorFundo;
             Texto = "Novo Botão";
-            var listaBotoesControlPai = Parent.Controls.Cast<Control>().Where(x => x.GetType() == typeof(Botao)).ToList();
-            if (listaBotoesControlPai.Any(x => x != this))
-            {
-                Texto += listaBotoesControlPai.Count - 1;
-            }
             Tamanho = new Point(100, 30);
-            Posicao = new Point((Parent.Size.Width - Tamanho.X) / 2, (Parent.Size.Height - Tamanho.Y) / 2);
 
             MouseEnter += (sender, args) =>
             {
@@ -80,6 +72,16 @@ namespace DesenvolvedorRelacional.Repositorio.Base
                 return;
             }
             base.OnMouseLeave(e);
+        }
+
+        protected override void OnParentChanged(EventArgs e)
+        {
+            var listaBotoesControlPai = Parent.Controls.Cast<Control>().Where(x => x.GetType() == typeof(Botao)).ToList();
+            if (listaBotoesControlPai.Any(x => x != this))
+            {
+                Texto += listaBotoesControlPai.Count - 1;
+            }
+            Posicao = new Point((Parent.Size.Width - Tamanho.X) / 2, (Parent.Size.Height - Tamanho.Y) / 2);
         }
     }
 }

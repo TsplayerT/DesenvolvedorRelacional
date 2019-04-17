@@ -5,13 +5,10 @@ using DesenvolvedorRelacional.Repositorio.Base;
 
 namespace DesenvolvedorRelacional
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
-            // removido
-                
             //var conexao = new Conectividade();
             //var gerenciar = new Gerenciamento(conexao);
             //gerenciar.AdicionarTabela("primeira_tabela");
@@ -19,23 +16,23 @@ namespace DesenvolvedorRelacional
             //gerenciar.AdicionarLinha("primeira_tabela");
             //gerenciar.Atualizar("primeira_tabela", "nova_coluna", 1, "asdasd");
 
+            var listaBotoes = new List<Botao>
+            {
+                new Botao(),
+                new Botao(),
+                new Botao()
+            };
+            var menu = new Repositorio.Base.Menu
+            {
+                PossivelMover = true,
+                Botoes = listaBotoes,
+                Posicao = new Point(0, 10)
+            };
             var janela = new Form
             {
                 Size = new Size(800, 600),
                 StartPosition = FormStartPosition.CenterScreen
             };
-
-            var menu = new Repositorio.Base.Menu
-            {
-                PossivelMover = true
-            };
-            menu.Botoes = new List<Botao>
-            {
-                new Botao(menu),
-                new Botao(menu),
-                new Botao(menu)
-            };
-            menu.Posicao = new Point(0, 10);
             janela.Controls.Add(menu);
             janela.ShowDialog();
         }
