@@ -1,5 +1,5 @@
 # Como clonar esse repositório
-#### Usando a ferramenta TortoiseSVN:
+### Usando a ferramenta TortoiseSVN:
 Link para Download: https://tortoisesvn.net/downloads.html
 - Escolha um diretório
 - Clique com o botão direito do mouse
