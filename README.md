@@ -1,6 +1,6 @@
 # Objetivos do projeto
 - [ ] Desenvolvimento rápido e prático de telas simples com base nas bibliotecas nativas do NET Framework
-    - [ ] Design gráfico armazenado em arquivos relacionais objetivos e direto
+    - [ ] Design gráfico armazenado em arquivos relacionais objetivos e diretos
 - [ ] Gerenciamento seguro de arquivos com manipulação básica
     - [ ] Sistema de autenticação com credenciais e tokens
     - [ ] Estrutura baseada em criptografia
