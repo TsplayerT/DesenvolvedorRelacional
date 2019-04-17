@@ -10,7 +10,7 @@ namespace DesenvolvedorRelacional
         static void Main(string[] args)
         {
 
-            // ALTERAÇÃO FEITA PELO GALO 
+            // removido
                 
             //var conexao = new Conectividade();
             //var gerenciar = new Gerenciamento(conexao);
