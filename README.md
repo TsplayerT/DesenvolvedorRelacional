@@ -1,3 +1,10 @@
+# Objetivos do projeto:
+[ ]Desenvolvimento rápido e prático de telas simples com base nas bibliotecas nativas do NET Framework
+   [ ]Design gráfico armazenado em arquivos relacionais objetivos e direto
+[ ]Gerenciamento seguro de arquivos com manipulação básica
+	 [ ]Sistema de autenticação com credenciais e tokens
+	 [ ]Estrutura baseada em criptografia
+
 # Como clonar esse repositório
 ### Usando a ferramenta TortoiseSVN:
 Link para Download: https://tortoisesvn.net/downloads.html
