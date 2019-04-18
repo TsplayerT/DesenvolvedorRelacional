@@ -1,5 +1,7 @@
-﻿using System;
+﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DesenvolvedorRelacional.Repositorio
@@ -11,54 +13,76 @@ namespace DesenvolvedorRelacional.Repositorio
             get => Location;
             set => Location = value;
         }
+
         public Point Tamanho
         {
             get => new Point(Size.Width, Size.Height);
             set => Size = new Size(value.X, value.Y);
         }
+
         public bool PossivelMover { get; set; }
         internal Point MousePosicaoAntiga { get; set; }
         public bool PossivelDestacarMouse { get; set; }
-        public IBase SincronizarMovimento { get; set; }
+        public ObservableCollection<IBase> SincronizarMovimento { get; }
 
-        protected override void OnMouseEnter(EventArgs e)
+        protected IBase()
         {
-            if (PossivelDestacarMouse)
+            MouseEnter += (s, e) =>
             {
-                Cursor = Cursors.Hand;
-            }
-        }
-
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            if (PossivelDestacarMouse)
+                if (PossivelDestacarMouse)
+                {
+                    Cursor = Cursors.Hand;
+                }
+            };
+            MouseLeave += (s, e) =>
             {
-                Cursor = Cursors.Default;
-            }
-        }
-
-        protected override void OnMouseDown(MouseEventArgs e)
-        {
-            if (PossivelMover && e.Button == MouseButtons.Left)
+                if (PossivelDestacarMouse)
+                {
+                    Cursor = Cursors.Default;
+                }
+            };
+            MouseDown += (s, e) =>
             {
-                MousePosicaoAntiga = e.Location;
-            }
-        }
-
-        protected override void OnMouseMove(MouseEventArgs e)
-        {
-            if (PossivelMover && e.Button == MouseButtons.Left)
+                if (PossivelMover && e.Button == MouseButtons.Left)
+                {
+                    MousePosicaoAntiga = e.Location;
+                }
+            };
+            MouseMove += (s, e) =>
             {
-                Left = e.X + Left - MousePosicaoAntiga.X;
-                Top = e.Y + Top - MousePosicaoAntiga.Y;
+                if (PossivelMover && e.Button == MouseButtons.Left)
+                {
+                    Left = e.X + Left - MousePosicaoAntiga.X;
+                    Top = e.Y + Top - MousePosicaoAntiga.Y;
+                }
+            };
 
-                //fazer funcionar em Utilidade.SincronizarMoviementos
-                //if (SincronizarMovimento != null)
-                //{
-                //    SincronizarMovimento.Left = e.X + Left - MousePosicaoAntiga.X + SincronizarMovimento.Posicao.X - Posicao.X;
-                //    SincronizarMovimento.Top = e.Y + Top - MousePosicaoAntiga.Y + SincronizarMovimento.Posicao.Y - Posicao.Y;
-                //}
-            }
+            SincronizarMovimento = new ObservableCollection<IBase>();
+            SincronizarMovimento.CollectionChanged += (s, e) =>
+            {
+                if (e.Action == NotifyCollectionChangedAction.Add)
+                {
+                    foreach (var novoIBase in e.NewItems.Cast<IBase>().ToList())
+                    {
+                        MouseMove += (sender, eventArgs) =>
+                        {
+                            if (PossivelMover && eventArgs.Button == MouseButtons.Left)
+                            {
+                                novoIBase.Left = eventArgs.X + Left - MousePosicaoAntiga.X + novoIBase.Posicao.X - Posicao.X;
+                                novoIBase.Top = eventArgs.Y + Top - MousePosicaoAntiga.Y + novoIBase.Posicao.Y - Posicao.Y;
+                            }
+                        };
+                        novoIBase.MouseMove += (sender, eventArgs) =>
+                        {
+                            if (PossivelMover && eventArgs.Button == MouseButtons.Left)
+                            {
+                                Left = eventArgs.X + novoIBase.Left - MousePosicaoAntiga.X + novoIBase.Posicao.X - Posicao.X;
+                                Top = eventArgs.Y + novoIBase.Top - MousePosicaoAntiga.Y + novoIBase.Posicao.Y - Posicao.Y;
+                            }
+                        };
+                    }
+                }
+            };
         }
     }
 }
