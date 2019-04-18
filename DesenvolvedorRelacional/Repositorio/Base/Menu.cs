@@ -9,7 +9,6 @@ namespace DesenvolvedorRelacional.Repositorio.Base
     public class Menu : IBase
     {
         private IBase VinculoVisivel { get; set; }
-
         public int TamanhoBorda => 10;
         public Color CorFundo => Color.FromArgb(75, 75, 75);
         public List<Botao> Botoes
@@ -21,14 +20,16 @@ namespace DesenvolvedorRelacional.Repositorio.Base
                 Controls.AddRange(value.Cast<Control>().ToArray());
 
                 var tamanhoTotal = TamanhoBorda;
+                //^^^^^^^^ CAUSANDO PROBLEM NOS EVENTOS DOS BOTOES vvvvvvv
                 foreach (var botaoAtual in value)
                 {
-                    botaoAtual.Posicao = new Point(10, tamanhoTotal);
+                    botaoAtual.Posicao = new Point(TamanhoBorda, tamanhoTotal);
                     if (botaoAtual != value.Last())
                     {
                         tamanhoTotal += TamanhoBorda + botaoAtual.Tamanho.Y;
                     }
                 }
+                //^^^^^^^^ CAUSANDO PROBLEM NOS EVENTOS DOS BOTOES ^^^^^^^^
 
                 if (value.Any())
                 {
@@ -40,6 +41,7 @@ namespace DesenvolvedorRelacional.Repositorio.Base
         public Menu()
         {
             BackColor = CorFundo;
+            PossivelMover = true;
         }
         //por enquanto só vincula com objetos do tipo Menu
         public void Vincular(int indexBotao, Menu menu)
@@ -51,7 +53,7 @@ namespace DesenvolvedorRelacional.Repositorio.Base
 
             botaoVinculo.MouseClick += (s, e) =>
             {
-                var botaoSelecionado = Botoes.Find(x => x.Selecionado && x != botaoVinculo);
+                var botaoSelecionado = Botoes.Find(x => x.EstaSelecionado && x != botaoVinculo);
                 if (botaoSelecionado != null)
                 {
                     botaoSelecionado.Clicar(true);
@@ -68,8 +70,6 @@ namespace DesenvolvedorRelacional.Repositorio.Base
 
                 menu.Visible = !menu.Visible;
             };
-            botaoVinculo.PossivelClicar = true;
-            botaoVinculo.PossivelDestacarMouse = true;
         }
     }
 }

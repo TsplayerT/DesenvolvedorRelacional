@@ -60,6 +60,9 @@
     <Compile Include="Repositorio\Base\Botao.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Repositorio\Base\CampoEscolha.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Repositorio\Conectividade.cs" />
     <Compile Include="Repositorio\Gerenciamento.cs" />
     <Compile Include="Repositorio\IBase.cs">

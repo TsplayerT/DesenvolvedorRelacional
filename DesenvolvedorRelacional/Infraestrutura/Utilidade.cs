@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using DesenvolvedorRelacional.Repositorio;
@@ -10,6 +10,32 @@ namespace DesenvolvedorRelacional.Infraestrutura
 {
     public static class Utilidade
     {
+        public enum TipoCor
+        {
+            CorFundo,
+            CorFundoDestaque,
+            CorFundoSelecionado,
+            CorFundoDestaqueSelecionado
+        }
+        public static double ValorEntre(this double valor, double minimo, double maximo)
+        {
+            return valor < minimo ? minimo : valor > maximo ? maximo : valor;
+        }
+        public static Dictionary<TipoCor, Color> PegarCoresInteracaoMouse(int r, int g, int b)
+        {
+            r = Convert.ToInt32(ValorEntre(r, 0, 180));
+            g = Convert.ToInt32(ValorEntre(g, 0, 180));
+            b = Convert.ToInt32(ValorEntre(b, 0, 180));
+
+            return new Dictionary<TipoCor, Color>
+            {
+                { TipoCor.CorFundo, Color.FromArgb(r, g, b) },
+                { TipoCor.CorFundoDestaque, Color.FromArgb(r + 25, g + 25, b + 25) },
+                { TipoCor.CorFundoSelecionado, Color.FromArgb(r + 75, g + 75, b + 75) },
+                { TipoCor.CorFundoDestaqueSelecionado, Color.FromArgb(r + 50, g + 50, b + 50) }
+            };
+
+        }
         public static void SincronizarMovimentos(this IBase base1, IBase base2)
         {
             base1.MouseMove += (sender, eventArgs) =>

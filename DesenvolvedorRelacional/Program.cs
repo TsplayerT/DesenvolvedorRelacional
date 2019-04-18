@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using DesenvolvedorRelacional.Infraestrutura;
 using DesenvolvedorRelacional.Repositorio.Base;
 
 namespace DesenvolvedorRelacional
@@ -17,9 +16,19 @@ namespace DesenvolvedorRelacional
             //gerenciar.AdicionarLinha("primeira_tabela");
             //gerenciar.Atualizar("primeira_tabela", "nova_coluna", 1, "asdasd");
 
+            var botaoTeste = new Botao
+            {
+                Posicao = new Point(400, 500)
+            };
+
+            var campoEscolha = new CampoEscolha
+            {
+                Posicao = new Point(200, 200)
+            };
+
             var menu = new Repositorio.Base.Menu
             {
-                PossivelMover = true,
+                //PossivelMover = true,
                 Botoes = new List<Botao>
                 {
                     new Botao(),
@@ -52,7 +61,9 @@ namespace DesenvolvedorRelacional
                 Size = new Size(800, 600),
                 StartPosition = FormStartPosition.CenterScreen
             };
+            janela.Controls.Add(botaoTeste);
             janela.Controls.Add(menu);
+            janela.Controls.Add(campoEscolha);
             janela.ShowDialog();
         }
     }
