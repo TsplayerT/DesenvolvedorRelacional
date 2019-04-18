@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using DesenvolvedorRelacional.Infraestrutura;
 using DesenvolvedorRelacional.Repositorio.Base;
 
 namespace DesenvolvedorRelacional
@@ -22,11 +23,22 @@ namespace DesenvolvedorRelacional
                 new Botao(),
                 new Botao()
             };
+            var listaBotoes2 = new List<Botao>
+            {
+                new Botao(),
+                new Botao()
+            };
             var menu = new Repositorio.Base.Menu
             {
                 PossivelMover = true,
                 Botoes = listaBotoes,
                 Posicao = new Point(0, 10)
+            };
+            var menu2 = new Repositorio.Base.Menu
+            {
+                PossivelMover = true,
+                Botoes = listaBotoes2,
+                Posicao = new Point(300, 10)
             };
             var janela = new Form
             {
@@ -34,6 +46,8 @@ namespace DesenvolvedorRelacional
                 StartPosition = FormStartPosition.CenterScreen
             };
             janela.Controls.Add(menu);
+            janela.Controls.Add(menu2);
+            menu2.SincronizarMovimentos(menu);
             janela.ShowDialog();
         }
     }

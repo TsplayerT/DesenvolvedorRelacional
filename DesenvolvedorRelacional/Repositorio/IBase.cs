@@ -19,6 +19,7 @@ namespace DesenvolvedorRelacional.Repositorio
         public bool PossivelMover { get; set; }
         internal Point MousePosicaoAntiga { get; set; }
         public bool PossivelDestacarMouse { get; set; }
+        public IBase SincronizarMovimento { get; set; }
 
         protected override void OnMouseEnter(EventArgs e)
         {
@@ -50,6 +51,13 @@ namespace DesenvolvedorRelacional.Repositorio
             {
                 Left = e.X + Left - MousePosicaoAntiga.X;
                 Top = e.Y + Top - MousePosicaoAntiga.Y;
+
+                //fazer funcionar em Utilidade.SincronizarMoviementos
+                //if (SincronizarMovimento != null)
+                //{
+                //    SincronizarMovimento.Left = e.X + Left - MousePosicaoAntiga.X + SincronizarMovimento.Posicao.X - Posicao.X;
+                //    SincronizarMovimento.Top = e.Y + Top - MousePosicaoAntiga.Y + SincronizarMovimento.Posicao.Y - Posicao.Y;
+                //}
             }
         }
     }
