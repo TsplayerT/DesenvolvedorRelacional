@@ -17,7 +17,7 @@ namespace DesenvolvedorRelacional.Repositorio
             set => Size = new Size(value.X, value.Y);
         }
 
-        public Point TamanhoClicarDiminuir { get; set; }
+        private Point TamanhoDiminuirClicar { get; }
         public bool PossivelMover { get; set; }
         public bool PossivelClicar { get; set; }
         public bool PossivelDestacarMouse { get; set; }
@@ -25,7 +25,7 @@ namespace DesenvolvedorRelacional.Repositorio
 
         protected IBase()
         {
-            TamanhoClicarDiminuir = new Point((int)(Tamanho.X * 0.03), (int)(Tamanho.Y * 0.03));
+            TamanhoDiminuirClicar = new Point((int)(Tamanho.X * 0.03), (int)(Tamanho.Y * 0.03));
             MouseEnter += (s, e) =>
             {
                 if (PossivelDestacarMouse)
@@ -48,11 +48,11 @@ namespace DesenvolvedorRelacional.Repositorio
                 }
                 if (PossivelClicar && e.Button == MouseButtons.Left)
                 {
-                    Posicao = new Point(Posicao.X + TamanhoClicarDiminuir.X / 2, Posicao.Y + TamanhoClicarDiminuir.Y / 2);
-                    Tamanho = new Point(Tamanho.X - TamanhoClicarDiminuir.X, Tamanho.Y - TamanhoClicarDiminuir.Y);
+                    Posicao = new Point(Posicao.X + TamanhoDiminuirClicar.X / 2, Posicao.Y + TamanhoDiminuirClicar.Y / 2);
+                    Tamanho = new Point(Tamanho.X - TamanhoDiminuirClicar.X, Tamanho.Y - TamanhoDiminuirClicar.Y);
                     foreach (Control filho in Controls)
                     {
-                        filho.Location = new Point(filho.Location.X - TamanhoClicarDiminuir.X / 2, filho.Location.Y - TamanhoClicarDiminuir.Y / 2);
+                        filho.Location = new Point(filho.Location.X - TamanhoDiminuirClicar.X / 2, filho.Location.Y - TamanhoDiminuirClicar.Y / 2);
                         //filho.Scale();
                     }
                 }
@@ -61,11 +61,11 @@ namespace DesenvolvedorRelacional.Repositorio
             {
                 if (PossivelClicar && e.Button == MouseButtons.Left)
                 {
-                    Posicao = new Point(Posicao.X - TamanhoClicarDiminuir.X / 2, Posicao.Y - TamanhoClicarDiminuir.Y / 2);
-                    Tamanho = new Point(Tamanho.X + TamanhoClicarDiminuir.X, Tamanho.Y + TamanhoClicarDiminuir.Y);
+                    Posicao = new Point(Posicao.X - TamanhoDiminuirClicar.X / 2, Posicao.Y - TamanhoDiminuirClicar.Y / 2);
+                    Tamanho = new Point(Tamanho.X + TamanhoDiminuirClicar.X, Tamanho.Y + TamanhoDiminuirClicar.Y);
                     foreach (Control filho in Controls)
                     {
-                        filho.Location = new Point(filho.Location.X + TamanhoClicarDiminuir.X / 2, filho.Location.Y + TamanhoClicarDiminuir.Y / 2);
+                        filho.Location = new Point(filho.Location.X + TamanhoDiminuirClicar.X / 2, filho.Location.Y + TamanhoDiminuirClicar.Y / 2);
                         //filho.Scale();
                     }
                 }
