@@ -16,16 +16,34 @@ namespace DesenvolvedorRelacional.Infraestrutura
             {
                 if (base2.PossivelMover && eventArgs.Button == MouseButtons.Left)
                 {
-                    base2.Left = eventArgs.X + base1.Left - base1.MousePosicaoAntiga.X + base2.Posicao.X - base1.Posicao.X;
-                    base2.Top = eventArgs.Y + base1.Top - base1.MousePosicaoAntiga.Y + base2.Posicao.Y - base1.Posicao.Y;
+                    var novaPosicaoX = eventArgs.X + base1.Left - base1.MousePosicaoAntiga.X + base2.Posicao.X - base1.Posicao.X;
+                    //if (novaPosicaoX > 0 && novaPosicaoX < base1.Parent.Size.Width - base1.Tamanho.X)
+                    {
+                        base2.Left = novaPosicaoX;
+                    }
+                    //ajustar, ainda naum está bom
+                    var novaPosicaoY = eventArgs.Y + base1.Top - base1.MousePosicaoAntiga.Y + base2.Posicao.Y - base1.Posicao.Y;
+                    //if (novaPosicaoY > 0 && novaPosicaoY < base1.Parent.Size.Height - base1.Tamanho.Y)
+                    {
+                        base2.Top = novaPosicaoY;
+                    }
                 }
             };
             base2.MouseMove += (sender, eventArgs) =>
             {
                 if (base2.PossivelMover && eventArgs.Button == MouseButtons.Left)
                 {
-                    base1.Left = eventArgs.X + base2.Left - base2.MousePosicaoAntiga.X + base1.Posicao.X - base2.Posicao.X;
-                    base1.Top = eventArgs.Y + base2.Top - base2.MousePosicaoAntiga.Y + base1.Posicao.Y - base2.Posicao.Y;
+                    var novaPosicaoX = eventArgs.X + base2.Left - base2.MousePosicaoAntiga.X + base1.Posicao.X - base2.Posicao.X;
+                    //if (novaPosicaoX > 0 && novaPosicaoX < base1.Parent.Size.Width - base1.Tamanho.X)
+                    {
+                        base1.Left = novaPosicaoX;
+                    }
+                    //ajustar, ainda naum está bom
+                    var novaPosicaoY = eventArgs.Y + base2.Top - base2.MousePosicaoAntiga.Y + base1.Posicao.Y - base2.Posicao.Y;
+                    //if (novaPosicaoY > 0 && novaPosicaoY < base1.Parent.Size.Height - base1.Tamanho.Y)
+                    {
+                        base1.Top = novaPosicaoY;
+                    }
                 }
             };
         }

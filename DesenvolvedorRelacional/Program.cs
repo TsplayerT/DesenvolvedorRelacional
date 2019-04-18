@@ -17,29 +17,25 @@ namespace DesenvolvedorRelacional
             //gerenciar.AdicionarLinha("primeira_tabela");
             //gerenciar.Atualizar("primeira_tabela", "nova_coluna", 1, "asdasd");
 
-            var botao1 = new Botao();
-            var botao2 = new Botao();
-            var listaBotoes = new List<Botao>
-            {
-                botao1,
-                botao2,
-                new Botao()
-            };
-            var listaBotoes2 = new List<Botao>
-            {
-                new Botao(),
-                new Botao()
-            };
             var menu = new Repositorio.Base.Menu
             {
                 PossivelMover = true,
-                Botoes = listaBotoes,
+                Botoes = new List<Botao>
+                {
+                    new Botao(),
+                    new Botao(),
+                    new Botao()
+                },
                 Posicao = new Point(0, 10)
             };
             var menu2 = new Repositorio.Base.Menu
             {
                 PossivelMover = true,
-                Botoes = listaBotoes2
+                Botoes = new List<Botao>
+                {
+                    new Botao(),
+                    new Botao()
+                }
             };
             var menu3 = new Repositorio.Base.Menu
             {
@@ -49,17 +45,14 @@ namespace DesenvolvedorRelacional
                     new Botao()
                 }
             };
-            botao1.Vincular(menu2);
-            botao2.Vincular(menu3);
+            menu.Vincular(0, menu2);
+            menu.Vincular(1, menu3);
             var janela = new Form
             {
                 Size = new Size(800, 600),
                 StartPosition = FormStartPosition.CenterScreen
             };
-            menu.SincronizarMovimentos(menu2);
             janela.Controls.Add(menu);
-            janela.Controls.Add(menu2);
-            janela.Controls.Add(menu3);
             janela.ShowDialog();
         }
     }

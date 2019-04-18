@@ -35,7 +35,6 @@ namespace DesenvolvedorRelacional.Repositorio.Base
 
         public Botao()
         {
-            PossivelClicar = true;
             LabelTexto = new Label
             {
                 AutoSize = true
@@ -48,16 +47,24 @@ namespace DesenvolvedorRelacional.Repositorio.Base
 
             MouseEnter += (s, e) =>
             {
-                BackColor = Selecionado ? CorFundoDestaqueSelecionado : CorFundoDestaque;
+                if (PossivelClicar)
+                {
+                    BackColor = Selecionado ? CorFundoDestaqueSelecionado : CorFundoDestaque;
+                }
             };
             MouseLeave += (s, e) =>
             {
-                BackColor = Selecionado ? CorFundoSelecionado : CorFundo;
+                if (PossivelClicar)
+                {
+                    BackColor = Selecionado ? CorFundoSelecionado : CorFundo;
+                }
             };
             MouseClick += (s, e) =>
             {
-                BackColor = CorFundoSelecionado;
-                Selecionado = !Selecionado;
+                if (PossivelClicar)
+                {
+                    Clicar();
+                }
             };
             ParentChanged += (s, e) =>
             {
@@ -79,15 +86,14 @@ namespace DesenvolvedorRelacional.Repositorio.Base
             base.OnMouseLeave(e);
         }
 
-        //por enquanto só vincula com objetos do tipo Menu
-        public void Vincular(Menu menu)
+        public void Clicar(bool mouseSaiu = false)
         {
-            menu.Posicao = new Point(Posicao.X + Tamanho.X + menu.TamanhoBorda * 2, Posicao.Y);
-            menu.Visible = false;
-            MouseClick += (s, e) =>
+            BackColor = CorFundoSelecionado;
+            Selecionado = !Selecionado;
+            if (mouseSaiu)
             {
-                menu.Visible = !menu.Visible;
-            };
+                BackColor = Selecionado ? CorFundoSelecionado : CorFundo;
+            }
         }
     }
 }

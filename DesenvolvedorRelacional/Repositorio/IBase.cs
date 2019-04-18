@@ -74,8 +74,17 @@ namespace DesenvolvedorRelacional.Repositorio
             {
                 if (PossivelMover && e.Button == MouseButtons.Left)
                 {
-                    Left = e.X + Left - MousePosicaoAntiga.X;
-                    Top = e.Y + Top - MousePosicaoAntiga.Y;
+                    var novaPosicaoX = e.X + Left - MousePosicaoAntiga.X;
+                    //if (novaPosicaoX > 0 && novaPosicaoX < Parent.Size.Width - Tamanho.X)
+                    {
+                        Left = novaPosicaoX;
+                    }
+                    //ajustar, ainda naum está bom
+                    var novaPosicaoY = e.Y + Top - MousePosicaoAntiga.Y;
+                    //if (novaPosicaoY > 0 && novaPosicaoY < Parent.Size.Height - Tamanho.Y)
+                    {
+                        Top = novaPosicaoY;
+                    }
                 }
             };
         }
