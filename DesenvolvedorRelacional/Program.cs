@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using DesenvolvedorRelacional.Infraestrutura;
-using DesenvolvedorRelacional.Repositorio;
 using DesenvolvedorRelacional.Repositorio.Base;
 
 namespace DesenvolvedorRelacional
@@ -46,7 +45,7 @@ namespace DesenvolvedorRelacional
                 Size = new Size(800, 600),
                 StartPosition = FormStartPosition.CenterScreen
             };
-            menu.SincronizarMovimento.Add(menu2);
+            menu.SincronizarMovimentos(menu2);
             janela.Controls.Add(menu);
             janela.Controls.Add(menu2);
             janela.ShowDialog();

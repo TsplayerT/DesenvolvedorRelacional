@@ -34,6 +34,7 @@ namespace DesenvolvedorRelacional.Repositorio.Base
 
         public Botao()
         {
+            PossivelClicar = true;
             LabelTexto = new Label
             {
                 AutoSize = true
@@ -44,36 +45,37 @@ namespace DesenvolvedorRelacional.Repositorio.Base
             Texto = "Novo Botão";
             Tamanho = new Point(100, 30);
 
+            MouseEnter += (sender, args) =>
+            {
+                BackColor = Selecionado ? CorFundoDestaqueSelecionado : CorFundoDestaque;
+            };
+            MouseLeave += (sender, args) =>
+            {
+                BackColor = Selecionado ? CorFundoSelecionado : CorFundo;
+            };
             MouseClick += (sender, args) =>
             {
                 BackColor = CorFundoSelecionado;
                 Selecionado = !Selecionado;
             };
+            ParentChanged += (sender, args) =>
+            {
+                var listaBotoesControlPai = Parent.Controls.Cast<Control>().Where(x => x.GetType() == typeof(Botao)).ToList();
+                if (listaBotoesControlPai.Any(x => x != this))
+                {
+                    Texto += listaBotoesControlPai.Count - 1;
+                }
+                Posicao = new Point((Parent.Size.Width - Tamanho.X) / 2, (Parent.Size.Height - Tamanho.Y) / 2);
+            };
         }
 
-        protected override void OnMouseEnter(EventArgs e)
-        {
-            BackColor = Selecionado ? CorFundoSelecionado : CorFundoDestaque;
-        }
         protected override void OnMouseLeave(EventArgs e)
         {
-            BackColor = Selecionado ? CorFundoSelecionado : CorFundo;
-
             if (ClientRectangle.Contains(PointToClient(MousePosition)))
             {
                 return;
             }
             base.OnMouseLeave(e);
-        }
-
-        protected override void OnParentChanged(EventArgs e)
-        {
-            var listaBotoesControlPai = Parent.Controls.Cast<Control>().Where(x => x.GetType() == typeof(Botao)).ToList();
-            if (listaBotoesControlPai.Any(x => x != this))
-            {
-                Texto += listaBotoesControlPai.Count - 1;
-            }
-            Posicao = new Point((Parent.Size.Width - Tamanho.X) / 2, (Parent.Size.Height - Tamanho.Y) / 2);
         }
     }
 }

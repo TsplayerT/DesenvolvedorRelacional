@@ -1,7 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Drawing;
-using System.Linq;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace DesenvolvedorRelacional.Repositorio
@@ -20,13 +17,15 @@ namespace DesenvolvedorRelacional.Repositorio
             set => Size = new Size(value.X, value.Y);
         }
 
+        public Point TamanhoClicarDiminuir { get; set; }
         public bool PossivelMover { get; set; }
-        internal Point MousePosicaoAntiga { get; set; }
+        public bool PossivelClicar { get; set; }
         public bool PossivelDestacarMouse { get; set; }
-        public ObservableCollection<IBase> SincronizarMovimento { get; }
+        internal Point MousePosicaoAntiga { get; set; }
 
         protected IBase()
         {
+            TamanhoClicarDiminuir = new Point((int)(Tamanho.X * 0.03), (int)(Tamanho.Y * 0.03));
             MouseEnter += (s, e) =>
             {
                 if (PossivelDestacarMouse)
@@ -47,6 +46,29 @@ namespace DesenvolvedorRelacional.Repositorio
                 {
                     MousePosicaoAntiga = e.Location;
                 }
+                if (PossivelClicar && e.Button == MouseButtons.Left)
+                {
+                    Posicao = new Point(Posicao.X + TamanhoClicarDiminuir.X / 2, Posicao.Y + TamanhoClicarDiminuir.Y / 2);
+                    Tamanho = new Point(Tamanho.X - TamanhoClicarDiminuir.X, Tamanho.Y - TamanhoClicarDiminuir.Y);
+                    foreach (Control filho in Controls)
+                    {
+                        filho.Location = new Point(filho.Location.X - TamanhoClicarDiminuir.X / 2, filho.Location.Y - TamanhoClicarDiminuir.Y / 2);
+                        //filho.Scale();
+                    }
+                }
+            };
+            MouseUp += (s, e) =>
+            {
+                if (PossivelClicar && e.Button == MouseButtons.Left)
+                {
+                    Posicao = new Point(Posicao.X - TamanhoClicarDiminuir.X / 2, Posicao.Y - TamanhoClicarDiminuir.Y / 2);
+                    Tamanho = new Point(Tamanho.X + TamanhoClicarDiminuir.X, Tamanho.Y + TamanhoClicarDiminuir.Y);
+                    foreach (Control filho in Controls)
+                    {
+                        filho.Location = new Point(filho.Location.X + TamanhoClicarDiminuir.X / 2, filho.Location.Y + TamanhoClicarDiminuir.Y / 2);
+                        //filho.Scale();
+                    }
+                }
             };
             MouseMove += (s, e) =>
             {
@@ -54,33 +76,6 @@ namespace DesenvolvedorRelacional.Repositorio
                 {
                     Left = e.X + Left - MousePosicaoAntiga.X;
                     Top = e.Y + Top - MousePosicaoAntiga.Y;
-                }
-            };
-
-            SincronizarMovimento = new ObservableCollection<IBase>();
-            SincronizarMovimento.CollectionChanged += (s, e) =>
-            {
-                if (e.Action == NotifyCollectionChangedAction.Add)
-                {
-                    foreach (var novoIBase in e.NewItems.Cast<IBase>().ToList())
-                    {
-                        MouseMove += (sender, eventArgs) =>
-                        {
-                            if (PossivelMover && eventArgs.Button == MouseButtons.Left)
-                            {
-                                novoIBase.Left = eventArgs.X + Left - MousePosicaoAntiga.X + novoIBase.Posicao.X - Posicao.X;
-                                novoIBase.Top = eventArgs.Y + Top - MousePosicaoAntiga.Y + novoIBase.Posicao.Y - Posicao.Y;
-                            }
-                        };
-                        novoIBase.MouseMove += (sender, eventArgs) =>
-                        {
-                            if (PossivelMover && eventArgs.Button == MouseButtons.Left)
-                            {
-                                Left = eventArgs.X + novoIBase.Left - MousePosicaoAntiga.X + novoIBase.Posicao.X - Posicao.X;
-                                Top = eventArgs.Y + novoIBase.Top - MousePosicaoAntiga.Y + novoIBase.Posicao.Y - Posicao.Y;
-                            }
-                        };
-                    }
                 }
             };
         }
