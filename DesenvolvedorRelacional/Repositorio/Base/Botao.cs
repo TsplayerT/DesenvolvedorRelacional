@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DesenvolvedorRelacional.Infraestrutura;
 
 namespace DesenvolvedorRelacional.Repositorio.Base
 {
@@ -45,20 +46,20 @@ namespace DesenvolvedorRelacional.Repositorio.Base
             Texto = "Novo Botão";
             Tamanho = new Point(100, 30);
 
-            MouseEnter += (sender, args) =>
+            MouseEnter += (s, e) =>
             {
                 BackColor = Selecionado ? CorFundoDestaqueSelecionado : CorFundoDestaque;
             };
-            MouseLeave += (sender, args) =>
+            MouseLeave += (s, e) =>
             {
                 BackColor = Selecionado ? CorFundoSelecionado : CorFundo;
             };
-            MouseClick += (sender, args) =>
+            MouseClick += (s, e) =>
             {
                 BackColor = CorFundoSelecionado;
                 Selecionado = !Selecionado;
             };
-            ParentChanged += (sender, args) =>
+            ParentChanged += (s, e) =>
             {
                 var listaBotoesControlPai = Parent.Controls.Cast<Control>().Where(x => x.GetType() == typeof(Botao)).ToList();
                 if (listaBotoesControlPai.Any(x => x != this))
@@ -76,6 +77,17 @@ namespace DesenvolvedorRelacional.Repositorio.Base
                 return;
             }
             base.OnMouseLeave(e);
+        }
+
+        //por enquanto só vincula com objetos do tipo Menu
+        public void Vincular(Menu menu)
+        {
+            menu.Posicao = new Point(Posicao.X + Tamanho.X + menu.TamanhoBorda * 2, Posicao.Y);
+            menu.Visible = false;
+            MouseClick += (s, e) =>
+            {
+                menu.Visible = !menu.Visible;
+            };
         }
     }
 }
