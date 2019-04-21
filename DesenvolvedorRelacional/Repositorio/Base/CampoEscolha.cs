@@ -35,6 +35,9 @@ namespace DesenvolvedorRelacional.Repositorio.Base
                     var tamanhoLabelTexto2 = TextRenderer.MeasureText(item.Text, item.Font);
                     item.Location = new Point((value.X - tamanhoLabelTexto2.Width) / 2, (value.Y - tamanhoLabelTexto2.Height) / 2);
                 }
+
+                PlanoEscolha.Size = new Size(value.Y, AlturaItem * (Items.Count + 1));
+                PlanoEscolha.Location = new Point(value.X - PlanoEscolha.Size.Width, 0);
             }
         }
         public CampoEscolha()
@@ -43,8 +46,13 @@ namespace DesenvolvedorRelacional.Repositorio.Base
             {
                 Texto = string.Empty
             };
-            PlanoEscolha = new Panel();
             Items = new ObservableCollection<Botao>();
+
+            PlanoEscolha = new Panel
+            {
+                BackColor = Color.Gray
+            };
+            Controls.Add(PlanoEscolha);
 
             BotaoExpandir = new Botao
             {
@@ -52,12 +60,17 @@ namespace DesenvolvedorRelacional.Repositorio.Base
                 PossivelDestacarMouse = true,
                 Texto = string.Empty
             };
+            BotaoExpandir.MouseEnter += (s, e) =>
+            {
+                BotaoExpandir.BackColor = Color.Gray;
+            };
             BotaoExpandir.MouseClick += (s, e) =>
             {
                 PlanoEscolha.Visible = !PlanoEscolha.Visible;
             };
             Controls.Add(BotaoExpandir);
 
+            Tamanho = Tamanho;
             PossivelMover = true;
             BackColor = CoresInteracaoMouse[Utilidade.TipoCor.CorFundo];
             Tamanho = new Point(200, 30);

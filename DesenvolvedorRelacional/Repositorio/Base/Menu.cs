@@ -42,11 +42,17 @@ namespace DesenvolvedorRelacional.Repositorio.Base
         {
             BackColor = CorFundo;
             PossivelMover = true;
+
+            MouseEnter += (s,e) =>
+            {
+                Botoes.ForEach(x=>x.BotaoSair());
+            };
         }
         //por enquanto só vincula com objetos do tipo Menu
         public void Vincular(int indexBotao, Menu menu)
         {
             var botaoVinculo = Botoes[indexBotao];
+            botaoVinculo.SincronizarMovimentos(new Botao());
             this.SincronizarMovimentos(menu);
             menu.Posicao = new Point(botaoVinculo.Posicao.X + botaoVinculo.Tamanho.X + menu.TamanhoBorda * 2, botaoVinculo.Posicao.Y);
             menu.Visible = false;
@@ -54,10 +60,8 @@ namespace DesenvolvedorRelacional.Repositorio.Base
             botaoVinculo.MouseClick += (s, e) =>
             {
                 var botaoSelecionado = Botoes.Find(x => x.EstaSelecionado && x != botaoVinculo);
-                if (botaoSelecionado != null)
-                {
-                    botaoSelecionado.Clicar(true);
-                }
+                botaoSelecionado?.Clicar(true);
+
                 if (menu.Parent == null)
                 {
                     Parent.Controls.Add(menu);

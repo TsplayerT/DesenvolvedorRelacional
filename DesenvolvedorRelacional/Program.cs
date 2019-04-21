@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using DesenvolvedorRelacional.Repositorio;
 using DesenvolvedorRelacional.Repositorio.Base;
 
 namespace DesenvolvedorRelacional
@@ -18,52 +19,64 @@ namespace DesenvolvedorRelacional
 
             var botaoTeste = new Botao
             {
+                PossivelMover = true,
                 Posicao = new Point(400, 500)
             };
-
-            var campoEscolha = new CampoEscolha
-            {
-                Posicao = new Point(200, 200)
-            };
-
-            var menu = new Repositorio.Base.Menu
-            {
-                //PossivelMover = true,
-                Botoes = new List<Botao>
-                {
-                    new Botao(),
-                    new Botao(),
-                    new Botao()
-                },
-                Posicao = new Point(0, 10)
-            };
-            var menu2 = new Repositorio.Base.Menu
+            var botaoTeste1 = new Botao
             {
                 PossivelMover = true,
-                Botoes = new List<Botao>
-                {
-                    new Botao(),
-                    new Botao()
-                }
+                Posicao = new Point(440, 540)
             };
-            var menu3 = new Repositorio.Base.Menu
+            var botaoTeste2 = new Botao
             {
                 PossivelMover = true,
-                Botoes = new List<Botao>
-                {
-                    new Botao()
-                }
+                Posicao = new Point(480, 580)
             };
-            menu.Vincular(0, menu2);
-            menu.Vincular(1, menu3);
+
+            //var campoEscolha = new CampoEscolha
+            //{
+            //    Posicao = new Point(200, 200)
+            //};
+
+            //var menu = new Repositorio.Base.Menu
+            //{
+            //    //PossivelMover = true,
+            //    Botoes = new List<Botao>
+            //    {
+            //        new Botao(),
+            //        new Botao(),
+            //        new Botao()
+            //    }
+            //};
+            //var menu2 = new Repositorio.Base.Menu
+            //{
+            //    PossivelMover = true,
+            //    Botoes = new List<Botao>
+            //    {
+            //        new Botao(),
+            //        new Botao()
+            //    }
+            //};
+            //var menu3 = new Repositorio.Base.Menu
+            //{
+            //    PossivelMover = true,
+            //    Botoes = new List<Botao>
+            //    {
+            //        new Botao()
+            //    }
+            //};
+            //menu.Vincular(0, menu2);
+            //menu.Vincular(1, menu3);
             var janela = new Form
             {
                 Size = new Size(800, 600),
                 StartPosition = FormStartPosition.CenterScreen
             };
             janela.Controls.Add(botaoTeste);
-            janela.Controls.Add(menu);
-            janela.Controls.Add(campoEscolha);
+            janela.Controls.Add(botaoTeste1);
+            janela.Controls.Add(botaoTeste2);
+            //janela.Controls.Add(menu);
+            //janela.Controls.Add(campoEscolha);
             janela.ShowDialog();
         }
     }

@@ -70,7 +70,6 @@ namespace DesenvolvedorRelacional.Repositorio.Base
                     BackColor = CoresInteracaoMouse[Utilidade.TipoCor.CorFundo];
                     Tamanho = new Point(100, 30);
                     TamanhoDiminuirClicar = new Point((int)(Tamanho.X * 0.03), (int)(Tamanho.Y * 0.03));
-
                     break;
             }
         }
@@ -86,10 +85,7 @@ namespace DesenvolvedorRelacional.Repositorio.Base
             };
             MouseLeave += (s, e) =>
             {
-                if (PossivelClicar)
-                {
-                    BackColor = EstaSelecionado ? CoresInteracaoMouse[Utilidade.TipoCor.CorFundoSelecionado] : CoresInteracaoMouse[Utilidade.TipoCor.CorFundo];
-                }
+                BotaoSair();
             };
             MouseDown += (s, e) =>
             {
@@ -124,6 +120,14 @@ namespace DesenvolvedorRelacional.Repositorio.Base
                     EstaSelecionado = !EstaSelecionado;
                 }
             };
+        }
+
+        public void BotaoSair()
+        {
+            if (PossivelClicar && (BackColor == CoresInteracaoMouse[Utilidade.TipoCor.CorFundoDestaqueSelecionado] || BackColor == CoresInteracaoMouse[Utilidade.TipoCor.CorFundoDestaque]))
+            {
+                BackColor = EstaSelecionado ? CoresInteracaoMouse[Utilidade.TipoCor.CorFundoSelecionado] : CoresInteracaoMouse[Utilidade.TipoCor.CorFundo];
+            }
         }
 
         protected override void OnMouseLeave(EventArgs e)
