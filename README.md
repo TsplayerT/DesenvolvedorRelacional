@@ -4,6 +4,8 @@
 - [ ] Gerenciamento seguro de arquivos com manipulação básica
     - [ ] Sistema de autenticação com credenciais e tokens
     - [ ] Estrutura baseada em criptografia
+- [ ] Geração facilitada de jogos RPG _(Role-Playing Game)_ de mesa
+    - [ ] Automação de criação de propriedade dos objetivos e entidades
 
 # Como clonar esse repositório
 ### Usando a ferramenta TortoiseSVN:
