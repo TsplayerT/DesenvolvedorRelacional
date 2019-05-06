@@ -6,6 +6,8 @@
     - [ ] Estrutura baseada em criptografia
 - [ ] Geração facilitada de jogos RPG _(Role-Playing Game)_ de mesa
     - [ ] Automação de criação de propriedade dos objetivos e entidades
+    - [ ] Sistema de salas para jogos diferentes e modos diversificados
+    - [ ] Processo de progressão do jogador para obtção de conquistas, funcionalidades e beneficios
 
 # Como clonar esse repositório
 ### Usando a ferramenta TortoiseSVN:
