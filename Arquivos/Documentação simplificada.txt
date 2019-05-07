@@ -1,0 +1,48 @@
+• APRESENTAÇÃO
+
+• INFRAESTRUTURA
+
+• REPOSITÓRIO
+	- Base
+		• bsNome
+			- id
+			- valor
+				• Goblin
+				• <[...]>
+		• bsAtributo
+			- id
+			- valor
+				• Força
+				• Destreza
+				• Constituição
+				• Inteligência
+				• Sabedoria
+				• Carisma
+		• bsRolagem
+			- id
+			- valor
+				• 2
+				• 4
+				• 6
+				• 8
+				• 12
+				• 20
+				• 100
+	- Estrutura
+		• esCriatura
+			- id
+			- idNome
+			- idVida
+			- idAtaque
+		• esVida
+			- id
+			- idBase
+			- idLevel
+			- idAtributo
+			- idRolagem
+		• esAtaque
+			- id
+			- idBase
+			- idLevel
+			- idAtributo
+			- idRolagem
