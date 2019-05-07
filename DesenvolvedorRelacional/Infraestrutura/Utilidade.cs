@@ -74,7 +74,7 @@ namespace DesenvolvedorRelacional.Infraestrutura
             };
         }
 
-        public static void RemoverEvento(string nomeEvento, IBase baseAlvo)
+        public static void RemoverEvento(IBase baseAlvo, string nomeEvento)
         {
             var f1 = typeof(Control).GetField(nomeEvento, BindingFlags.Static | BindingFlags.NonPublic);
             //var f2 = new List<FieldInfo>();
