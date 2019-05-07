@@ -1,8 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-using DesenvolvedorRelacional.Apresentacao;
 
-namespace DesenvolvedorRelacional.Repositorio
+namespace DesenvolvedorRelacional.Apresentacao
 {
     public abstract class IBase : Panel
     {

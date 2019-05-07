@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
-using DesenvolvedorRelacional.Repositorio;
+using DesenvolvedorRelacional.Apresentacao;
 
 namespace DesenvolvedorRelacional.Infraestrutura
 {

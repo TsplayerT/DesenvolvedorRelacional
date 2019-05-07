@@ -53,6 +53,15 @@
     <StartupObject>DesenvolvedorRelacional.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Apresentacao\Base\Botao.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Apresentacao\Base\CampoEscolha.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Apresentacao\Base\Menu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Apresentacao\Manutencao\Repositorio.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -66,18 +75,9 @@
     <Compile Include="Infraestrutura\Utilidade.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Apresentacao\Base\Botao.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Apresentacao\Base\CampoEscolha.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Repositorio\Conectividade.cs" />
     <Compile Include="Repositorio\Gerenciamento.cs" />
     <Compile Include="Apresentacao\IBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Apresentacao\Base\Menu.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
