@@ -21,7 +21,7 @@ namespace DesenvolvedorRelacional.Infraestrutura
         {
             return valor < minimo ? minimo : valor > maximo ? maximo : valor;
         }
-        public static Dictionary<TipoCor, Color> PegarCoresInteracaoMouse(int r, int g, int b)
+        public static Dictionary<TipoCor, Color> PegarCoresInteracaoMouse(int r = 0, int g = 0, int b = 0)
         {
             r = Convert.ToInt32(ValorEntre(r, 0, 180));
             g = Convert.ToInt32(ValorEntre(g, 0, 180));

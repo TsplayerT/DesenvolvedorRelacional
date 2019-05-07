@@ -60,6 +60,12 @@
     <Compile Include="Apresentacao\Base\CampoEscolha.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Apresentacao\Base\CampoTexto.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Apresentacao\Base\CampoDeslizante.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Apresentacao\Base\MenuLista.cs">
       <SubType>Component</SubType>
     </Compile>

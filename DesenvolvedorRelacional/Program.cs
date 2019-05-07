@@ -17,6 +17,12 @@ namespace DesenvolvedorRelacional
             //gerenciar.AdicionarLinha("primeira_tabela");
             //gerenciar.Atualizar("primeira_tabela", "nova_coluna", 1, "asdasd");
 
+            var campoTexto = new CampoTexto
+            {
+                //PossivelMover = true,
+                //PossivelDestacarMouse = true,
+                Posicao = new Point(200, 450)
+            };
             var botaoTeste = new Botao
             {
                 PossivelMover = true,
@@ -68,6 +74,7 @@ namespace DesenvolvedorRelacional
             janela.Controls.Add(botaoTeste);
             janela.Controls.Add(menu);
             janela.Controls.Add(campoEscolha);
+            janela.Controls.Add(campoTexto);
             janela.ShowDialog();
         }
     }
