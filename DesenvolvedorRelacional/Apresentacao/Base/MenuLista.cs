@@ -6,7 +6,7 @@ using DesenvolvedorRelacional.Infraestrutura;
 
 namespace DesenvolvedorRelacional.Apresentacao.Base
 {
-    public class Menu : IBase
+    public class MenuLista : IBase
     {
         private IBase VinculoVisivel { get; set; }
         public int TamanhoBorda => 10;
@@ -39,22 +39,22 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
             }
         }
 
-        public Menu()
+        public MenuLista()
         {
             BackColor = CorFundo;
             PossivelMover = true;
         }
-        //por enquanto, só vincula com objetos do tipo Menu
-        public void Vincular(int indexBotao, Menu menu)
+        //por enquanto, só vincula com objetos do tipo MenuLista
+        public void Vincular(int indexBotao, MenuLista menuLista)
         {
             var botaoVinculo = Botoes[indexBotao];
-            this.SincronizarMovimentos(menu);
-            menu.Posicao = new Point(botaoVinculo.Posicao.X + botaoVinculo.Tamanho.X + menu.TamanhoBorda * 2, botaoVinculo.Posicao.Y);
-            menu.Visible = false;
+            this.SincronizarMovimentos(menuLista);
+            menuLista.Posicao = new Point(botaoVinculo.Posicao.X + botaoVinculo.Tamanho.X + menuLista.TamanhoBorda * 2, botaoVinculo.Posicao.Y);
+            menuLista.Visible = false;
 
             botaoVinculo.PossivelClicar = true;
             PossivelMover = true;
-            menu.PossivelMover = true;
+            menuLista.PossivelMover = true;
             botaoVinculo.Mascara.MouseClick += (s, e) =>
             {
                 var botaoSelecionado = Botoes.Find(x => x.EstaSelecionado && x != botaoVinculo);
@@ -62,17 +62,17 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
                 {
                     botaoSelecionado.Clicar(true);
                 }
-                if (menu.Parent == null)
+                if (menuLista.Parent == null)
                 {
-                    Parent.Controls.Add(menu);
+                    Parent.Controls.Add(menuLista);
                 }
-                if (VinculoVisivel != null && VinculoVisivel != menu)
+                if (VinculoVisivel != null && VinculoVisivel != menuLista)
                 {
                     VinculoVisivel.Visible = false;
                 }
-                VinculoVisivel = menu;
+                VinculoVisivel = menuLista;
 
-                menu.Visible = !menu.Visible;
+                menuLista.Visible = !menuLista.Visible;
             };
         }
     }

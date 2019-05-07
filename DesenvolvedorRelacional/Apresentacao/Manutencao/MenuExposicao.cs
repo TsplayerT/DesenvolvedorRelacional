@@ -2,7 +2,11 @@
 
 namespace DesenvolvedorRelacional.Apresentacao.Manutencao
 {
-    public class Manutencao : IBase
+    public class MenuExposicao : IBase
     {
+        public MenuExposicao()
+        {
+
+        }
     }
 }

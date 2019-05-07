@@ -53,19 +53,20 @@
     <StartupObject>DesenvolvedorRelacional.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Aplicacao\MalhaQuadriculada.cs" />
     <Compile Include="Apresentacao\Base\Botao.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Apresentacao\Base\CampoEscolha.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Apresentacao\Base\Menu.cs">
+    <Compile Include="Apresentacao\Base\MenuLista.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Apresentacao\Manutencao\Repositorio.cs">
+    <Compile Include="Apresentacao\Manutencao\TelaManutencaoRepositorio.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Apresentacao\Manutencao\Menu.cs">
+    <Compile Include="Apresentacao\Manutencao\MenuExposicao.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Apresentacao\Mascara.cs">
@@ -121,7 +122,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Aplicacao\" />
     <Folder Include="Dominio\" />
     <Folder Include="Servico\" />
   </ItemGroup>

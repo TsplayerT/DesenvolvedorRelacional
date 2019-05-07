@@ -20,7 +20,7 @@ namespace DesenvolvedorRelacional.Apresentacao
                 Mascara.Size = new Size(value.X, value.Y);
             }
         }
-        public Mascara Mascara { get; set; }
+        protected internal Mascara Mascara { get; set; }
         public bool PossivelMover { get; set; }
         public bool PossivelDestacarMouse { get; set; }
         internal Point MousePosicaoAntiga { get; set; }

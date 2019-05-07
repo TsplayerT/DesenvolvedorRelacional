@@ -111,6 +111,24 @@ namespace DesenvolvedorRelacional.Infraestrutura
                 }
             }
         }
+
+        public static void PropriedadeApenasLeitura(this object objeto, string nomeProriedade, bool apenasLeitura)
+        {
+            if (!string.IsNullOrEmpty(nomeProriedade) && objeto != null)
+            {
+                var descriptor = TypeDescriptor.GetProperties(objeto.GetType())[nomeProriedade];
+                if (descriptor != null)
+                {
+                    var attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
+                    var isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
+
+                    if (isReadOnly != null)
+                    {
+                        isReadOnly.SetValue(attrib, apenasLeitura);
+                    }
+                }
+            }
+        }
     }
 }
 

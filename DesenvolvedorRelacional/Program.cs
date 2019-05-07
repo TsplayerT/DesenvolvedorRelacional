@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using DesenvolvedorRelacional.Apresentacao.Base;
+using DesenvolvedorRelacional.Infraestrutura;
 
 namespace DesenvolvedorRelacional
 {
@@ -29,7 +30,7 @@ namespace DesenvolvedorRelacional
                 Posicao = new Point(200, 200)
             };
 
-            var menu = new Apresentacao.Base.Menu
+            var menu = new Apresentacao.Base.MenuLista
             {
                 PossivelMover = true,
                 Botoes = new List<Botao>
@@ -40,7 +41,7 @@ namespace DesenvolvedorRelacional
                 },
                 Posicao = new Point(0, 10)
             };
-            var menu2 = new Apresentacao.Base.Menu
+            var menu2 = new Apresentacao.Base.MenuLista
             {
                 PossivelMover = true,
                 Botoes = new List<Botao>
@@ -49,7 +50,7 @@ namespace DesenvolvedorRelacional
                     new Botao()
                 }
             };
-            var menu3 = new Apresentacao.Base.Menu
+            var menu3 = new Apresentacao.Base.MenuLista
             {
                 PossivelMover = true,
                 Botoes = new List<Botao>
