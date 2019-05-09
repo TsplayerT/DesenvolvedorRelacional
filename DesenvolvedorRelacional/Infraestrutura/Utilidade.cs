@@ -112,7 +112,7 @@ namespace DesenvolvedorRelacional.Infraestrutura
             }
         }
 
-        public static void PropriedadeApenasLeitura(this object objeto, string nomeProriedade, bool apenasLeitura)
+        public static void LeituraPropriedade(this object objeto, string nomeProriedade, bool apenasLeitura)
         {
             if (!string.IsNullOrEmpty(nomeProriedade) && objeto != null)
             {
