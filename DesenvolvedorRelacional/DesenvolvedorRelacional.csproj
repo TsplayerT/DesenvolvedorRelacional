@@ -53,6 +53,7 @@
     <StartupObject>DesenvolvedorRelacional.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Aplicacao\ListaPrivada.cs" />
     <Compile Include="Aplicacao\MalhaQuadriculada.cs" />
     <Compile Include="Apresentacao\Base\Botao.cs">
       <SubType>Component</SubType>
@@ -69,13 +70,16 @@
     <Compile Include="Apresentacao\Base\MenuLista.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Apresentacao\Manutencao\TelaManutencaoRepositorio.cs">
+    <Compile Include="Apresentacao\Essencial\BarraRolagemVertical.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Apresentacao\Manutencao\ManutencaoRepositorio.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Apresentacao\Manutencao\MenuExposicao.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Apresentacao\Mascara.cs">
+    <Compile Include="Apresentacao\Essencial\Mascara.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Infraestrutura\Seguranca\Encriptacao.cs" />

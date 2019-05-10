@@ -2,10 +2,10 @@
 
 namespace DesenvolvedorRelacional.Apresentacao.Manutencao
 {
-    public class TelaManutencaoRepositorio: IBase
+    public class ManutencaoRepositorio: IBase
     {
         private Gerenciamento Gerenciamento { get; }
-        public TelaManutencaoRepositorio(Gerenciamento gerenciamento)
+        public ManutencaoRepositorio(Gerenciamento gerenciamento)
         {
             Gerenciamento = gerenciamento;
         }

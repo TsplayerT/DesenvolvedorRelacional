@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using DesenvolvedorRelacional.Infraestrutura;
@@ -8,8 +9,8 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
     public class CampoTexto : IBase
     {
         public Color CorTextoInvalido => Color.FromArgb(250, 50, 50);
-        public Dictionary<Utilidade.TipoCor, Color> CoresInteracaoTexto => Utilidade.PegarCoresInteracaoMouse();
-        public Dictionary<Utilidade.TipoCor, Color> CoresInteracaoFundo => Utilidade.PegarCoresInteracaoMouse(100, 100, 100);
+        public Dictionary<Utilidade.TipoCor, Color> CoresInteracaoTexto => Utilidade.PegarCoresInteracaoMouse(0, 0, 0);
+        public Dictionary<Utilidade.TipoCor, Color> CoresInteracaoFundo => Utilidade.PegarCoresInteracaoMouse();
         private Control ControlPai { get; set; }
         private Label LabelTexto { get; }
         public Font TextoFonte
@@ -28,7 +29,6 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
             set
             {
                 Size = new Size(value.X, value.Y);
-                Mascara.Size = new Size(value.X, value.Y);
                 LabelTexto.Size = new Size(value.X, value.Y);
                 LabelTexto.Font = new Font(LabelTexto.Font.FontFamily, (float)(value.Y * 0.5));
             }
@@ -39,7 +39,7 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
             Controls.Add(LabelTexto);
 
             Tamanho = new Point(300, 30);
-            BackColor = CoresInteracaoFundo[Utilidade.TipoCor.CorFundo];
+            BackColor = CoresInteracaoFundo[Utilidade.TipoCor.CorNormal];
 
             ImplementarEventos();
         }
@@ -53,11 +53,9 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
 
         private void ImplementarEventos()
         {
-            Mascara.MouseClick += (s, e) =>
+            MouseClick += (s, e) =>
             {
-                Focus();
-                TrocarCorTexto();
-                BackColor = CoresInteracaoFundo[Utilidade.TipoCor.CorFundoDestaque];
+                BackColor = CoresInteracaoFundo[Utilidade.TipoCor.CorDestaque];
             };
 
             KeyDown += (s, e) =>
@@ -79,9 +77,12 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
 
                         break;
                     case Keys.Enter:
-                        PerderFoco(this);
-                        TrocarCorTexto();
-                        BackColor = CoresInteracaoFundo[Utilidade.TipoCor.CorFundo];
+                        //this.PerderFoco();
+
+                        //está no OnLostFocus()
+                        //TrocarCorTexto();
+                        //BackColor = CoresInteracaoFundo[Utilidade.TipoCor.CorNormal];
+
                         //Texto = Texto.Remove(Texto.Length - 1);
                         //SendKeys.Send("{TAB}");
                         break;
@@ -111,12 +112,14 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
                     case Keys.RControlKey:
                         break;
                     default:
-                        TrocarCorTexto();
-
                         var tamanhoLabelTexto = TextRenderer.MeasureText(LabelTexto.Text, LabelTexto.Font);
                         if (tamanhoLabelTexto.Width < Tamanho.X * 0.9)
                         {
                             Texto += e.KeyCode;
+                        }
+                        else
+                        {
+                            LabelTexto.ForeColor = CorTextoInvalido;
                         }
                         //necessário?
                         //if (tamanhoLabelTexto.Width > Tamanho.X * 0.9)
@@ -139,26 +142,27 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
             }
             else if (Focused)
             {
-                LabelTexto.ForeColor = CoresInteracaoTexto[Utilidade.TipoCor.CorFundoDestaqueSelecionado];
+                LabelTexto.ForeColor = CoresInteracaoTexto[Utilidade.TipoCor.CorDestaqueSelecionado];
             }
             else
             {
-                LabelTexto.ForeColor = CoresInteracaoTexto[Utilidade.TipoCor.CorFundo];
+                LabelTexto.ForeColor = CoresInteracaoTexto[Utilidade.TipoCor.CorNormal];
             }
         }
-        public void PerderFoco(object sender)
+
+        protected override void OnGotFocus(EventArgs e)
         {
-            var control = sender as Control;
+            TrocarCorTexto();
 
-            if (control != null)
-            {
-                var isTabStop = control.TabStop;
+            base.OnGotFocus(e);
+        }
 
-                control.TabStop = false;
-                control.Enabled = false;
-                control.Enabled = true;
-                control.TabStop = isTabStop;
-            }
+        protected override void OnLostFocus(EventArgs e)
+        {
+            TrocarCorTexto();
+            BackColor = CoresInteracaoFundo[Utilidade.TipoCor.CorNormal];
+
+            base.OnLostFocus(e);
         }
     }
 }

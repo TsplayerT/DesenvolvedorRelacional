@@ -1,13 +1,16 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace DesenvolvedorRelacional.Apresentacao
+namespace DesenvolvedorRelacional.Apresentacao.Essencial
 {
-    public class Mascara : Panel
+    public class Mascara : IBase
     {
-        public Mascara()
-        {
-        }
+        //public new bool PossivelMover => false;
+        //public new bool PossivelDestacarMouse => false;
+
+        //public Mascara()
+        //{
+        //}
 
         protected Graphics Graficos { get; set; }
 
@@ -16,7 +19,9 @@ namespace DesenvolvedorRelacional.Apresentacao
             get
             {
                 var cp = base.CreateParams;
+
                 cp.ExStyle |= 0x00000020; // WS_EX_TRANSPARENT
+
                 return cp;
             }
         }

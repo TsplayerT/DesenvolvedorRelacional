@@ -10,7 +10,7 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
 {
     public class CampoEscolha : IBase
     {
-        public Dictionary<Utilidade.TipoCor, Color> CoresInteracaoMouse => Utilidade.PegarCoresInteracaoMouse(100, 100, 100);
+        public Dictionary<Utilidade.TipoCor, Color> CoresInteracaoMouse => Utilidade.PegarCoresInteracaoMouse();
 
         public int AlturaItem => Tamanho.Y;
         private ObservableCollection<Botao> Items { get; }
@@ -39,17 +39,16 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
         }
         public CampoEscolha()
         {
-            ItemEscolhido = new Botao
+            ItemEscolhido = new Botao(Botao.TipoBotao.Basico)
             {
                 Texto = string.Empty
             };
             PlanoEscolha = new Panel();
             Items = new ObservableCollection<Botao>();
 
-            BotaoExpandir = new Botao
+            BotaoExpandir = new Botao(Botao.TipoBotao.Basico)
             {
-                PossivelClicar = true,
-                PossivelDestacarMouse = true,
+                PossivelDestacarFundo = true,
                 Texto = string.Empty
             };
             BotaoExpandir.MouseClick += (s, e) =>
@@ -59,14 +58,14 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
             Controls.Add(BotaoExpandir);
 
             PossivelMover = true;
-            BackColor = CoresInteracaoMouse[Utilidade.TipoCor.CorFundo];
+            BackColor = CoresInteracaoMouse[Utilidade.TipoCor.CorNormal];
             Tamanho = new Point(200, 30);
 
             Items.CollectionChanged += (s, e) =>
             {
                 if (e.Action == NotifyCollectionChangedAction.Add)
                 {
-                    var novoItem = new Botao
+                    var novoItem = new Botao(Botao.TipoBotao.Basico)
                     {
                         //PossivelClicar = true,
                         PossivelDestacarMouse = true,

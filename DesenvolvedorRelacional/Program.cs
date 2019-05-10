@@ -2,13 +2,14 @@
 using System.Drawing;
 using System.Windows.Forms;
 using DesenvolvedorRelacional.Apresentacao.Base;
-using DesenvolvedorRelacional.Infraestrutura;
+using DesenvolvedorRelacional.Apresentacao.Essencial;
 
 namespace DesenvolvedorRelacional
 {
     public class Program
     {
-        private static void Main(string[] args)
+        //private static void Main(string[] args)
+        private static void Main()
         {
             //var conexao = new Conectividade();
             //var gerenciar = new Gerenciamento(conexao);
@@ -16,6 +17,27 @@ namespace DesenvolvedorRelacional
             //gerenciar.AdicionarColuna("primeira_tabela", "nova_coluna");
             //gerenciar.AdicionarLinha("primeira_tabela");
             //gerenciar.Atualizar("primeira_tabela", "nova_coluna", 1, "asdasd");
+
+            var barraRolagemVertical = new BarraRolagemVertical();
+
+            var menuu = new MenuLista
+            {
+                Botoes = new List<Botao>
+                {
+                    new Botao(),
+                    new Botao(),
+                    new Botao(),
+                    new Botao(),
+                    new Botao(),
+                    new Botao()
+                },
+                Posicao = new Point(700, 0)
+            };
+
+            var barraRolagemVertical2 = new BarraRolagemVertical
+            {
+                Base = menuu
+            };
 
             var campoTexto = new CampoTexto
             {
@@ -26,7 +48,7 @@ namespace DesenvolvedorRelacional
             var botaoTeste = new Botao
             {
                 PossivelMover = true,
-                PossivelClicar = true,
+                PossivelDestacarFundo = true,
                 PossivelDestacarMouse = true,
                 Posicao = new Point(400, 500)
             };
@@ -36,7 +58,7 @@ namespace DesenvolvedorRelacional
                 Posicao = new Point(200, 200)
             };
 
-            var menu = new Apresentacao.Base.MenuLista
+            var menu = new MenuLista
             {
                 PossivelMover = true,
                 Botoes = new List<Botao>
@@ -47,7 +69,7 @@ namespace DesenvolvedorRelacional
                 },
                 Posicao = new Point(0, 10)
             };
-            var menu2 = new Apresentacao.Base.MenuLista
+            var menu2 = new MenuLista
             {
                 PossivelMover = true,
                 Botoes = new List<Botao>
@@ -56,7 +78,7 @@ namespace DesenvolvedorRelacional
                     new Botao()
                 }
             };
-            var menu3 = new Apresentacao.Base.MenuLista
+            var menu3 = new MenuLista
             {
                 PossivelMover = true,
                 Botoes = new List<Botao>
@@ -75,6 +97,8 @@ namespace DesenvolvedorRelacional
             janela.Controls.Add(menu);
             janela.Controls.Add(campoEscolha);
             janela.Controls.Add(campoTexto);
+            janela.Controls.Add(menuu);
+            janela.Controls.Add(barraRolagemVertical);
             janela.ShowDialog();
         }
     }

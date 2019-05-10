@@ -12,16 +12,30 @@ namespace DesenvolvedorRelacional.Infraestrutura
     {
         public enum TipoCor
         {
-            CorFundo,
-            CorFundoDestaque,
-            CorFundoSelecionado,
-            CorFundoDestaqueSelecionado
+            CorNormal,
+            CorDestaque,
+            CorSelecionado,
+            CorDestaqueSelecionado
+        }
+        public static void PerderFoco(this object sender)
+        {
+            var control = sender as Control;
+
+            if (control != null)
+            {
+                var isTabStop = control.TabStop;
+
+                control.TabStop = false;
+                control.Enabled = false;
+                control.Enabled = true;
+                control.TabStop = isTabStop;
+            }
         }
         public static double ValorEntre(this double valor, double minimo, double maximo)
         {
             return valor < minimo ? minimo : valor > maximo ? maximo : valor;
         }
-        public static Dictionary<TipoCor, Color> PegarCoresInteracaoMouse(int r = 0, int g = 0, int b = 0)
+        public static Dictionary<TipoCor, Color> PegarCoresInteracaoMouse(int r = 100, int g = 100, int b = 100)
         {
             r = Convert.ToInt32(ValorEntre(r, 0, 180));
             g = Convert.ToInt32(ValorEntre(g, 0, 180));
@@ -29,10 +43,10 @@ namespace DesenvolvedorRelacional.Infraestrutura
 
             return new Dictionary<TipoCor, Color>
             {
-                { TipoCor.CorFundo, Color.FromArgb(r, g, b) },
-                { TipoCor.CorFundoDestaque, Color.FromArgb(r + 25, g + 25, b + 25) },
-                { TipoCor.CorFundoSelecionado, Color.FromArgb(r + 75, g + 75, b + 75) },
-                { TipoCor.CorFundoDestaqueSelecionado, Color.FromArgb(r + 50, g + 50, b + 50) }
+                { TipoCor.CorNormal, Color.FromArgb(r, g, b) },
+                { TipoCor.CorDestaque, Color.FromArgb(r + 25, g + 25, b + 25) },
+                { TipoCor.CorSelecionado, Color.FromArgb(r + 75, g + 75, b + 75) },
+                { TipoCor.CorDestaqueSelecionado, Color.FromArgb(r + 50, g + 50, b + 50) }
             };
 
         }

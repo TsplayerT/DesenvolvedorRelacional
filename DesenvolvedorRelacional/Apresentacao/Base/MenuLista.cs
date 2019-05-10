@@ -22,7 +22,7 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
                 var tamanhoTotal = TamanhoBorda;
                 foreach (var botaoAtual in value)
                 {
-                    botaoAtual.PossivelClicar = false;
+                    botaoAtual.PossivelDestacarFundo = false;
                     botaoAtual.PossivelDestacarMouse = false;
 
                     botaoAtual.Posicao = new Point(TamanhoBorda, tamanhoTotal);
@@ -52,7 +52,7 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
             menuLista.Posicao = new Point(botaoVinculo.Posicao.X + botaoVinculo.Tamanho.X + menuLista.TamanhoBorda * 2, botaoVinculo.Posicao.Y);
             menuLista.Visible = false;
 
-            botaoVinculo.PossivelClicar = true;
+            botaoVinculo.PossivelDestacarFundo = true;
             PossivelMover = true;
             menuLista.PossivelMover = true;
             botaoVinculo.Mascara.MouseClick += (s, e) =>

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DesenvolvedorRelacional.Apresentacao.Essencial;
 using DesenvolvedorRelacional.Infraestrutura;
 
 namespace DesenvolvedorRelacional.Apresentacao.Base
@@ -25,10 +25,11 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
                 LabelTexto.Location = new Point((Tamanho.X - tamanhoLabelTexto.Width) / 2, (Tamanho.Y - tamanhoLabelTexto.Height) / 2);
             }
         }
+
+        public  bool EstaSelecionado { get; set; }
+        public new bool PossivelDestacarFundo { get; set; }
+        internal Mascara Mascara { get; }
         private Point TamanhoDiminuirClicar { get; }
-        public bool EstaSelecionado { get; set; }
-        public bool PossivelClicar { get; set; }
-        public Dictionary<Utilidade.TipoCor, Color> CoresInteracaoMouse { get; set; }
 
         public enum TipoBotao
         {
@@ -39,18 +40,20 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
 
         public Botao(TipoBotao tipoBotao = TipoBotao.Completo)
         {
+            LabelTexto = new Label();
+            Mascara = new Mascara();
+            Controls.Add(Mascara);
+
             switch (tipoBotao)
             {
                 case TipoBotao.Completo:
 
-                    PossivelClicar = true;
-                    PossivelDestacarMouse = true;
+                    PossivelDestacarFundo = true;
                     ImplementarEventos();
 
                     goto case TipoBotao.Simples;
                 case TipoBotao.Simples:
 
-                    LabelTexto = new Label();
                     Controls.Add(LabelTexto);
                     Texto = "Novo Botão";
                     ParentChanged += (s, e) =>
@@ -66,8 +69,7 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
                     goto case TipoBotao.Basico;
                 case TipoBotao.Basico:
 
-                    CoresInteracaoMouse = Utilidade.PegarCoresInteracaoMouse(100, 100, 100);
-                    BackColor = CoresInteracaoMouse[Utilidade.TipoCor.CorFundo];
+                    BackColor = CoresDestaqueFundo[Utilidade.TipoCor.CorNormal];
                     Tamanho = new Point(100, 30);
                     TamanhoDiminuirClicar = new Point((int)(Tamanho.X * 0.03), (int)(Tamanho.Y * 0.03));
 
@@ -78,21 +80,21 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
         {
             Mascara.MouseEnter += (s, e) =>
             {
-                if (PossivelClicar)
+                if (PossivelDestacarFundo)
                 {
-                    BackColor = EstaSelecionado ? CoresInteracaoMouse[Utilidade.TipoCor.CorFundoDestaqueSelecionado] : CoresInteracaoMouse[Utilidade.TipoCor.CorFundoDestaque];
+                    BackColor = EstaDestacado ? CoresDestaqueFundo[Utilidade.TipoCor.CorDestaqueSelecionado] : CoresDestaqueFundo[Utilidade.TipoCor.CorDestaque];
                 }
             };
             Mascara.MouseLeave += (s, e) =>
             {
-                if (PossivelClicar)
+                if (PossivelDestacarFundo)
                 {
-                    BackColor = EstaSelecionado ? CoresInteracaoMouse[Utilidade.TipoCor.CorFundoSelecionado] : CoresInteracaoMouse[Utilidade.TipoCor.CorFundo];
+                    BackColor = EstaDestacado ? CoresDestaqueFundo[Utilidade.TipoCor.CorSelecionado] : CoresDestaqueFundo[Utilidade.TipoCor.CorNormal];
                 }
             };
             Mascara.MouseDown += (s, e) =>
             {
-                if (PossivelClicar && e.Button == MouseButtons.Left)
+                if (PossivelDestacarFundo && e.Button == MouseButtons.Left)
                 {
                     Posicao = new Point(Posicao.X + TamanhoDiminuirClicar.X / 2, Posicao.Y + TamanhoDiminuirClicar.Y / 2);
                     Tamanho = new Point(Tamanho.X - TamanhoDiminuirClicar.X, Tamanho.Y - TamanhoDiminuirClicar.Y);
@@ -105,7 +107,7 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
             };
             Mascara.MouseUp += (s, e) =>
             {
-                if (PossivelClicar && e.Button == MouseButtons.Left)
+                if (PossivelDestacarFundo && e.Button == MouseButtons.Left)
                 {
                     Posicao = new Point(Posicao.X - TamanhoDiminuirClicar.X / 2, Posicao.Y - TamanhoDiminuirClicar.Y / 2);
                     Tamanho = new Point(Tamanho.X + TamanhoDiminuirClicar.X, Tamanho.Y + TamanhoDiminuirClicar.Y);
@@ -118,7 +120,7 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
             };
             Mascara.MouseClick += (s, e) =>
             {
-                if (PossivelClicar)
+                if (PossivelDestacarFundo)
                 {
                     EstaSelecionado = !EstaSelecionado;
                 }
@@ -127,12 +129,18 @@ namespace DesenvolvedorRelacional.Apresentacao.Base
 
         public void Clicar(bool tirarDestaque = false)
         {
-            BackColor = CoresInteracaoMouse[Utilidade.TipoCor.CorFundoSelecionado];
+            BackColor = CoresDestaqueFundo[Utilidade.TipoCor.CorSelecionado];
             EstaSelecionado = !EstaSelecionado;
             if (tirarDestaque)
             {
-                BackColor = EstaSelecionado ? CoresInteracaoMouse[Utilidade.TipoCor.CorFundoSelecionado] : CoresInteracaoMouse[Utilidade.TipoCor.CorFundo];
+                BackColor = EstaSelecionado ? CoresDestaqueFundo[Utilidade.TipoCor.CorSelecionado] : CoresDestaqueFundo[Utilidade.TipoCor.CorNormal];
             }
+        }
+        protected override void OnControlAdded(ControlEventArgs e)
+        {
+            Mascara.BringToFront();
+
+            base.OnControlAdded(e);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace DesenvolvedorRelacional.Aplicacao
                     var novoBloco = new Botao
                     {
                         PossivelMover = false,
-                        PossivelClicar = false,
+                        PossivelDestacarFundo= false,
                         PossivelDestacarMouse = false,
                         Tamanho = new Point(largura, altura),
                         Posicao = new Point(posicaoX, posicaoY)
